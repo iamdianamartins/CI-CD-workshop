@@ -1,0 +1,46 @@
+# (on pull requests and pushes to main)
+
+#Lint the code
+#Check the formatting of the code 
+
+name: "Action 1"
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+jobs:
+  lint:
+    name: Lint Action
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Checkout Setup Node.js
+        uses: actions/setup-node@v4
+      - name: Install dependencies
+        run: npm install
+      - name: Setup project
+        run: npm run setup
+      - name: Lint code
+        run: npm run lint
+  format:
+    name: Format Action
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Checkout Setup Node.js
+        uses: actions/setup-node@v4
+      - name: Install dependencies
+        run: npm install
+      - name: Setup project
+        run: npm run setup
+      - name: Check code formatting
+        run: npm run format:check
+      - name: Format code
+        run: npm run format:write
+
+    
