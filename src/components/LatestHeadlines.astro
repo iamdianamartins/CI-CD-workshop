@@ -1,0 +1,17 @@
+---
+import { getCollection } from "astro:content";
+
+const articleEntries = await getCollection('articles');
+const links = articleEntries.map(entry => ({
+    title: entry.data.title,
+    href: `/articles/${entry.slug}`,
+    author: entry.data.author,
+}))
+
+---
+
+<ul>
+    {links.map(link => (
+        <li><a href={link.href}>{link.title} by {link.author}</a></li>
+    ))}
+</ul>
